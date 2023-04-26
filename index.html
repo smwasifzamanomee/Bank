@@ -1,12 +1,211 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            clifford: '#da373d',
+          }
+        }
+      }
+    }
+  </script>
+  <title>Bank</title>
 </head>
+
 <body>
-    
+  <div id="login-area">
+    <h1 class="text-3xl font-bold text-blue-500 flex justify-center items-center mt-[100px]">
+      Welcome to the Bank
+    </h1>
+    <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+      <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+        <form>
+          <div>
+            <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
+            <div class="mt-2">
+              <input name="email" type="email"
+                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+            </div>
+          </div>
+
+          <div>
+            <div class="flex items-center justify-between">
+              <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
+              <div class="text-sm">
+                <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-500">Forgot password?</a>
+              </div>
+            </div>
+            <div class="mt-2">
+              <input name="password" type="password"
+                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+            </div>
+          </div>
+
+          <div>
+            <button id="login"
+              class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign
+              in</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div id="transction-area">
+    <h1 class="text-3xl font-bold text-blue-500 flex justify-center items-center mt-[100px]">Transction area</h1>
+    <!-- 3 card in a row -->
+    <div class="flex justify-center gap-10">
+      <div class="w-[300px]">
+        <div class=" bg-blue-500 shadow-md rounded my-6 p-6">
+          <div class="flex justify-center">
+            <div class="flex">
+              <h1 class="text-gray-600 font-bold md:text-2xl text-xl">Deposit Balance</h1>
+            </div>
+          </div>
+          <div class="flex justify-center">
+            <div class="flex">
+              <h1 class="text-gray-600 font-bold md:text-2xl text-xl">$ <span id="currentDeposit">00</span></h1>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="w-[300px]">
+        <div class=" bg-red-500 shadow-md rounded my-6 p-6">
+          <div class="flex justify-center">
+            <div class="flex">
+              <h1 class="text-gray-600 font-bold md:text-2xl text-xl">Withdraw Balance</h1>
+            </div>
+          </div>
+          <div class="flex justify-center">
+            <div class="flex">
+              <h1 class="text-gray-600 font-bold md:text-2xl text-xl">$ <span id="currentWithdraw">00</span></h1>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="w-[300px]">
+        <div class=" bg-yellow-500 shadow-md rounded my-6 p-6">
+          <div class="flex justify-center">
+            <div class="flex">
+              <h1 class="text-gray-600 font-bold md:text-2xl text-xl">Total Balance</h1>
+            </div>
+          </div>
+          <div class="flex justify-center">
+            <div class="flex">
+              <h1 class="text-gray-600 font-bold md:text-2xl text-xl">$ <span id="currentBalance">1000</span></h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2 card deposit and withdraw section with 1 input in a row -->
+    <div class="flex justify-center gap-10">
+      <div class="w-[470px]">
+        <div class=" bg-white shadow-md shadow-black rounded my-6 p-6">
+          <div class="flex justify-center">
+            <div class="flex">
+              <h1 class="text-gray-600 font-bold md:text-2xl text-xl">Deposit</h1>
+            </div>
+          </div>
+          <div class="flex justify-center mt-4">
+            <div class="flex">
+              <input type="text" id="depositAmount"
+                class="w-[300px] h-[40px] rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 px-4"
+                placeholder="$ amount you want to deposit">
+            </div>
+          </div>
+          <div class="flex justify-center mt-4">
+            <div class="flex">
+              <button id="addDeposit"
+                class="flex w-full justify-center rounded-md bg-green-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 p-4">Deposit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="w-[470px]">
+        <div class=" bg-white shadow-md shadow-black rounded my-6 p-6">
+          <div class="flex justify-center">
+            <div class="flex">
+              <h1 class="text-gray-600 font-bold md:text-2xl text-xl">Withdraw</h1>
+            </div>
+          </div>
+          <div class="flex justify-center mt-4">
+            <div class="flex">
+              <input type="text" id="withdrawAmount"
+                class="w-[300px] h-[40px] rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 px-4"
+                placeholder="$ amount you want to withdraw">
+            </div>
+          </div>
+          <div class="flex justify-center mt-4">
+            <div class="flex">
+              <button id="addWithdraw"
+                class="flex w-full justify  center rounded-md bg-green-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 p-4">Withdraw</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    // login button event handler
+    const login = document.getElementById('login');
+    login.addEventListener('click', function () {
+      const loginArea = document.getElementById('login-area');
+      loginArea.style.display = 'none';
+      const transctionArea = document.getElementById('transction-area');
+      transctionArea.style.display = 'block';
+    });
+
+    // deposit button event handler
+    const addDeposit = document.getElementById('addDeposit');
+    addDeposit.addEventListener('click', function () {
+      const depositAmount = document.getElementById('depositAmount').value;
+      const depositNumber = parseFloat(depositAmount);
+
+      updateSpanText('currentDeposit', depositNumber);
+      updateSpanText('currentBalance', depositNumber);
+
+      document.getElementById('depositAmount').value = '';
+    });
+
+    // withdraw button event handler
+    const addWithdraw = document.getElementById('addWithdraw');
+    addWithdraw.addEventListener('click', function () {
+      const withdrawAmount = document.getElementById('withdrawAmount').value;
+      const withdrawNumber = parseFloat(withdrawAmount);
+
+      updateSpanText('currentWithdraw', withdrawNumber);
+      updateSpanText('currentBalance', -1 * withdrawNumber);
+
+      document.getElementById('withdrawAmount').value = '';
+    });
+
+    function updateSpanText(id, depositNumber) {
+      const current = document.getElementById(id).innerText;
+      const totalAmount = parseFloat(depositNumber) + parseFloat(current);
+      document.getElementById(id).innerText = totalAmount;
+    }
+
+    function updateSpanText(id, withdrawNumber) {
+      const current = document.getElementById(id).innerText;
+      const totalAmount = parseFloat(withdrawNumber) + parseFloat(current);
+      document.getElementById(id).innerText = totalAmount;
+    }
+
+
+  </script>
+
 </body>
+
 </html>
