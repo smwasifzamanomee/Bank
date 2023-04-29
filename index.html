@@ -173,10 +173,16 @@
       const depositAmount = document.getElementById('depositAmount').value;
       const depositNumber = parseFloat(depositAmount);
 
-      updateSpanText('currentDeposit', depositNumber);
-      updateSpanText('currentBalance', depositNumber);
+      if (depositNumber < 0) {
+        alert('Please enter a positive number');
+      }
+      else {
+        updateSpanText('currentDeposit', depositNumber);
+        updateSpanText('currentBalance', depositNumber);
 
-      document.getElementById('depositAmount').value = '';
+        document.getElementById('depositAmount').value = '';
+
+      }
     });
 
     // withdraw button event handler
@@ -185,10 +191,15 @@
       const withdrawAmount = document.getElementById('withdrawAmount').value;
       const withdrawNumber = parseFloat(withdrawAmount);
 
-      updateSpanText('currentWithdraw', withdrawNumber);
-      updateSpanText('currentBalance', -1 * withdrawNumber);
+      if (withdrawNumber < 0) {
+        alert('Please enter a positive number');
+      }
+      else {
+        updateSpanText('currentWithdraw', withdrawNumber);
+        updateSpanText('currentBalance', -1 * withdrawNumber);
 
-      document.getElementById('withdrawAmount').value = '';
+        document.getElementById('withdrawAmount').value = '';
+      }
     });
 
     function updateSpanText(id, depositNumber) {
